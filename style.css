@@ -1,0 +1,6 @@
+body{
+    background: rgb(255, 251, 216);
+}
+.div:hover{
+    background: rgb(204, 204, 255);
+}
