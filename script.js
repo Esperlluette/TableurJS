@@ -5,36 +5,86 @@
  * 
  */
 
+
 var table = document.getElementById('table');
 
-var reset = document.getElementsByName(reset);
-var calcul = document.getElementsByName(calcul);
+var resetB = document.getElementById("reset");
+var calculB = document.getElementById("calcul");
 
+
+resetB.addEventListener("click", () => { vanish(table) }, false);
+
+
+calculB.addEventListener("click", () => { calcul(table) }, false);
+
+
+
+function vanish(table) {
+    /**
+     * @params Table HTML : table
+     * 
+     * - vide le tableau passé en paramètres et le 
+     *   re-rempli avec la valeur par défaut
+     */
+
+
+
+}
+
+function calcul(table) {
+    getAllValue(table)
+
+
+    for (let i = 2; i < table.length*2; i++) {
+        for (let j = 2; j < table.length*2; j++) {
+
+        }
+    }
+
+}
+
+
+function getAllValue(table) {
+    /**
+     * @params Table HTML : table
+     * @return Array : values
+     * 
+     * - récupère toutes les valeurs du tableau pour les retourner dans une liste.
+     */
+
+
+    
+
+}
 
 divGenerator(table);
 
 
+
 function divGenerator(table) {
 
-
-
     /**
-     * @params Tableau html : table
-     * Crée les divs à l'intérieur du tableur 
+     * @params Table HTML : table
      * 
-     * - récuperer les lignes du tableau. 
-     * 
+     * - crée renpli un tableau HTML vide avec des td>div 
      */
 
-    for (let i = 1; i < 6; i++) {
-        for (let j = 0; j < j; j++) {
+    for (let i = 2; i <= 8; i = i + 2) {
+        for (let j = 2; j <= 8; j = j + 2) {
+
+
+            var td = document.createElement("td");
+
+
             var div = document.createElement("div");
             div.className = "div";
-            div.innerHTML = " 0 ";
+            div.innerHTML = " 1 ";
             div.setAttribute("contenteditable", "true");
-            var tRow = table.childNodes[i].children[j];
-    
-            tRow.appendChild(div);
+
+            td.appendChild(div);
+
+            table.childNodes[1].childNodes[i].appendChild(td);
+
         }
     }
 }
