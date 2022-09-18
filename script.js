@@ -32,14 +32,11 @@ function vanish(table) {
 }
 
 function calcul(table) {
+    // console.log(table);
     getAllValue(table)
 
 
-    for (let i = 2; i < table.length*2; i++) {
-        for (let j = 2; j < table.length*2; j++) {
 
-        }
-    }
 
 }
 
@@ -52,8 +49,22 @@ function getAllValue(table) {
      * - récupère toutes les valeurs du tableau pour les retourner dans une liste.
      */
 
+    var value = [];
 
-    
+    console.log(table.childNodes[1].children[1]);
+    // console.log(table.childNodes[1].children);
+    for (let i = 1; i < table.childNodes[1].children.length; i++) {
+        var temp = [];
+        var node ;
+        for (let j = 1; j <= 4; j++) {
+            // console.log(table.childNodes[1].childNodes[i].length);
+            
+            // temp.push(table.childNodes[1].childNodes[i])
+
+        }
+    }
+
+
 
 }
 
