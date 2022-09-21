@@ -1,12 +1,4 @@
 /**
- * - Fonction de génération de divs. 
- * - Fonction de mise à zéro des compteurs.
- * - écouteur sur les boutons reset et calcul.
- * 
- */
-
-
-/**
  * lorsque j'affiche les résultats et que je 
  * réinitialise le tableur les lignes total se dupliquent
  */
@@ -19,10 +11,9 @@ var table = document.getElementById('table');
 var resetB = document.getElementById("reset");
 var calculB = document.getElementById("calcul");
 
-var boolResults = false;
+var hasResults = false;
 
-
-resetB.addEventListener("click", () => { vanish() }, false);
+resetB.addEventListener("click", () => { vanish(table) }, false);
 
 
 calculB.addEventListener("click", () => { calcul(table) }, false);
@@ -34,17 +25,24 @@ function vanish() {
      * @params Table HTML : table
      * 
      * - vide le tableau passé en paramètres et le 
-     *   re-rempli avec la valeur par défaut (0)
+     *   re-rempli avec la valeur par défaut (0) puis supprime 
+     *   la colone de résultats.
      */
     var collection = document.getElementsByClassName('div');
     for (let i = 0; i < collection.length; i++) {
         collection[i].childNodes[0].nodeValue = "1"
     }
-    console.log("Tableau_réinitialisé \nbip boup");
-    boolResults = false;
+
+    deleteResults(table);
+
+    console.log("\nTableau_réinitialisé");
 }
 
 function calcul() {
+
+    if (hasResults) {
+        deleteResults(table);
+    }
 
     var collection = document.getElementsByClassName('div');
     var tCollection = getAllValue(collection);
@@ -52,17 +50,31 @@ function calcul() {
     var resultsVertical = calculVertical(tSortCollection);
     var resultHorizontal = calculHorizontal(tSortCollection);
 
-    // console.table(resultsVertical);
-    // console.table(resultHorizontal);
-    if (!boolResults){
     resultToScreen(resultsVertical, resultHorizontal, table);
-    } else console.log('nope');
+
+    hasResults = true;
+
+}
+
+
+function deleteResults(table) {
+    /**
+     * @params Array : table
+     * @return void
+     * 
+     * - supprime la colone total
+     */
+    
+    console.log(table);
+    for (let i = 2; i < tableY*2+1; i+=2) {
+        table.childNodes[1].childNodes[i].removeChild(table.childNodes[1].childNodes[i].childNodes[7])
+    }
+
+    hasResults = false;
 
 }
 
 function resultToScreen(resultsY, resultsX, table) {
-
-
     //résultats horizontaux ok
     //résultats verticaux Pas ok 
     /**
@@ -73,23 +85,21 @@ function resultToScreen(resultsY, resultsX, table) {
      * - Affiche les résultats totaux 
      */
 
-    j=0;
-    for (let i = 2; i <= tableY*2; i+=2) {
-            console.log(i);
-            var td = document.createElement("td");
+    j = 0;
+    for (let i = 2; i <= tableY * 2; i += 2) {
+        var td = document.createElement("td");
 
 
-            var div = document.createElement("div");
-            div.className = "div";
-            div.id = "total "+  i;
-            div.innerHTML =  resultsX[j];
+        var div = document.createElement("div");
+        div.className = "div";
+        div.id = "total " + i;
+        div.innerHTML = resultsX[j];
 
-            td.appendChild(div);
+        td.appendChild(div);
 
-            table.childNodes[1].childNodes[i].appendChild(td);
-     j++;
+        table.childNodes[1].childNodes[i].appendChild(td);
+        j++;
     }
-    boolResults = true;
 }
 
 function calculHorizontal(tSortCollection) {
